@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body
+{
+    font-family: 'DM sans';
+    background: #F8F9FB;
+}
+.css-i4bv87-MuiSvgIcon-root
+{
+    font-size: 16px !important;
+}
