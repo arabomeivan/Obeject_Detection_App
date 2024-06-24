@@ -1,7 +1,8 @@
 import React, {useRef, useState} from 'react'
+import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 import Webcam from 'react-webcam';
 import { Button } from 'flowbite-react'
-import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
+import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import webcam from '../assets/img/webcam.png';
 import lighting from '../assets/img/lighting.png';
@@ -10,19 +11,24 @@ import tick from '../assets/img/tick-circle.png';
 
 const HomePage = () => {
 
+
   // const value = 0.66;
 
   const [streamKey, setStreamKey] = useState(0);
+  const[webcamIsOn, setWebcamStatus] = useState(false);
     const webCamRef = useRef(null);
 
 
-    const startRecording= ()=>
-        {
-          const videoStream=  webCamRef.current.stream;
-            console.log('Video stream:', videoStream);
-
-            setStreamKey((prevkey) => prevkey + 1);
-        }
+    const startRecording = () => {
+      if (webCamRef.current && webCamRef.current.stream) {
+        const videoStream = webCamRef.current.stream;
+        // Perform actions with videoStream
+        setStreamKey(prevkey => prevkey + 1);
+        setWebcamStatus(true);
+      } else {
+        console.error('Webcam reference or stream not available.');
+      }
+    };
 
         // const stopRecording = () => {
         //     if (webCamRef.current && webCamRef.current.stream) {
@@ -70,9 +76,24 @@ const HomePage = () => {
         
         {/* default indicator for webcam */}
         <div className='mx-auto'>
-        <img src={webcam} alt="notloading" className='block mx-auto' />
 
-<div className='text-[10px] text-[#4A4A68] font-normal text-center'>
+        {
+    webcamIsOn ? <CircularProgressbarWithChildren value={100} background={true} styles={buildStyles({
+
+      backgroundColor: '#755AE2'
+    })}>
+
+    {
+      <DoneOutlinedIcon/>
+    }
+    </CircularProgressbarWithChildren> :
+  <img src={webcam} alt="notloading" className='block mx-auto' />
+
+  }
+            
+
+
+<div className='text-[10px] text-[#4A4A68] mt-2 font-normal text-center'>
  Webcam
 </div>
         </div>
@@ -85,9 +106,18 @@ const HomePage = () => {
 
  {/* default indicator for webcam */}
  <div className='mx-auto'>
-        <img src={wifi} alt="notloading" className='block mx-auto' />
+ {
+    webcamIsOn ? <CircularProgressbarWithChildren value={66}>
 
-<div className='text-[10px] text-[#4A4A68] font-normal text-center'>
+    {
+  
+    }
+    </CircularProgressbarWithChildren> :
+  <img src={lighting} alt="notloading" className='block mx-auto' />
+
+  }
+
+<div className='text-[10px] text-[#4A4A68] mt-2 font-normal text-center'>
 Speed
 </div>
         </div>
@@ -103,9 +133,20 @@ Speed
 
  {/* default indicator for webcam */}
  <div className='mx-auto'>
-        <img src={webcam} alt="notloading" className='block mx-auto' />
+    
+ {
+    webcamIsOn ? <CircularProgressbarWithChildren value={66}>
 
-<div className='text-[10px] text-[#4A4A68] font-normal text-center'>
+    {
+  
+    }
+    </CircularProgressbarWithChildren> :
+  <img src={webcam} alt="notloading" className='block mx-auto' />
+
+  }
+            
+
+<div className='text-[10px] text-[#4A4A68] mt-2 font-normal text-center'>
  Gadget mic
 </div>
         </div>
@@ -117,19 +158,25 @@ Speed
   
  {/* default indicator for webcam */}
  <div className='mx-auto'>
-        <img src={lighting} alt="notloading" className='block mx-auto' />
 
-<div className='text-[10px] text-[#4A4A68] font-normal text-center'>
+  {
+    webcamIsOn ? <CircularProgressbarWithChildren value={66}>
+
+    {
+  
+    }
+    </CircularProgressbarWithChildren> :
+  <img src={lighting} alt="notloading" className='block mx-auto' />
+
+  }
+        
+
+<div className='text-[10px] text-[#4A4A68] font-normal text-center mt-2'>
  Lighting
 </div>
         </div>
 
-{/* <CircularProgressbarWithChildren value={66}>
 
-  {
-
-  }
-  </CircularProgressbarWithChildren> */}
        </div>
         </div>
       </div>

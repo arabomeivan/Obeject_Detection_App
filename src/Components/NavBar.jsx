@@ -1,4 +1,4 @@
-
+import React, {useRef, useState, useEffect} from 'react'
 import { Link } from "react-router-dom";
 import logo from '../assets/img/logo.png';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
@@ -6,7 +6,22 @@ import timer from '../assets/img/timer-start.png';
 
 const NavBar = () => {
 
-    
+    // countdown
+  const [secondsLeft, setSecondsLeft] = useState(300);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSecondsLeft((prevSeconds) => (prevSeconds > 0 ? prevSeconds - 1 : 0));
+    }, 1000);
+
+    // Cleanup the interval on component unmount or when count reaches 0
+    return () => clearInterval(timer);
+  }, []);
+
+// Convert seconds to minutes and seconds
+const minutes = Math.floor(secondsLeft / 60);
+const seconds = secondsLeft % 60;
+
   return (
     <div>
 
@@ -41,7 +56,7 @@ const NavBar = () => {
 </div>
 
 <div className="flex items-center gap-1">
-<span className="font-bold text-xs md:text-lg">29:10</span>
+<span className="font-bold text-xs md:text-lg">{minutes}:{seconds < 10 ? `0${seconds}` : seconds}</span>
 <span className="hidden md:block">time left</span>
 </div>
 </div>
