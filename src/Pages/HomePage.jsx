@@ -1,8 +1,8 @@
 import React, {useRef, useState} from 'react'
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
-import Webcam from 'react-webcam';
 import { Button } from 'flowbite-react'
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
+import ObjectDetection from '../Components/ObjectDetection'
 import 'react-circular-progressbar/dist/styles.css';
 import webcam from '../assets/img/webcam.png';
 import lighting from '../assets/img/lighting.png';
@@ -11,25 +11,16 @@ import tick from '../assets/img/tick-circle.png';
 
 const HomePage = () => {
 
+  const [startRecording, setStartRecording] = useState(null);
+  const [webcamIsOn, setWebcamStatus] = useState(false);
 
-  // const value = 0.66;
-
-  const [streamKey, setStreamKey] = useState(0);
-  const[webcamIsOn, setWebcamStatus] = useState(false);
-    const webCamRef = useRef(null);
-
-
-    const startRecording = () => {
-      if (webCamRef.current && webCamRef.current.stream) {
-        const videoStream = webCamRef.current.stream;
-        // Perform actions with videoStream
-        setStreamKey(prevkey => prevkey + 1);
-        setWebcamStatus(true);
-      } else {
-        console.error('Webcam reference or stream not available.');
-      }
-    };
-
+  const handleStartRecording = () => {
+    if (startRecording) {
+      startRecording();
+    } else {
+      console.error("Start recording function is not available.");
+    }
+  };
         // const stopRecording = () => {
         //     if (webCamRef.current && webCamRef.current.stream) {
         //       const videoStream = webCamRef.current.stream;
@@ -58,12 +49,7 @@ const HomePage = () => {
       
       {/* Webcam wrapper */}
       <div className='Webcam rounded-[10px] p-1 border-[#755AE2] border md:max-w-[275px]'>
-      <Webcam
-       audio={false}
-       ref={webCamRef}
-       screenshotFormat="image/jpeg"
-       key={streamKey}
-       />
+      <ObjectDetection setStartRecording={setStartRecording} setWebcamStatus={setWebcamStatus}  />
       </div>
 
 
