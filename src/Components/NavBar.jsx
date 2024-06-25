@@ -64,8 +64,8 @@ const seconds = secondsLeft % 60;
 
 </div>
 
-<div className="p-2 rounded-full bg-[#E6E0FF] text-[#755AE2] flex self-center w-[30px] h-[30px]">
-<div className="icon-wrapper self-center h-fit">
+<div className="p-2 rounded-full bg-[#E6E0FF] text-[#755AE2] self-center w-[40px] h-[40px] flex">
+<div className="icon-wrapper self-center h-fit mx-auto">
 <RemoveRedEyeOutlinedIcon/>
 </div>
 
