@@ -1,13 +1,16 @@
-import React, {useRef, useState} from 'react'
+import React, { useState} from 'react'
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import { Button } from 'flowbite-react'
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import ObjectDetection from '../Components/ObjectDetection'
 import 'react-circular-progressbar/dist/styles.css';
 import webcam from '../assets/img/webcam.png';
 import lighting from '../assets/img/lighting.png';
-import wifi from '../assets/img/wifi.png';
-import tick from '../assets/img/tick-circle.png';
+import lampcharge from '../assets/img/lamp-charge.png';
+import speed from '../assets/img/speed.png';
+import microphone from '../assets/img/microphone.png';
+import monitorrecorder from '../assets/img/monitor-recorder.png';
 
 const HomePage = () => {
 
@@ -68,21 +71,29 @@ const HomePage = () => {
         {/* First Wrapper for webcam and internet speed */}
         <div className='flex gap-4'>
        <div className='w-[91px] bg-[#E6E0FF] p-4 rounded-2xl relative'>
-        <div className='bg-[#755AE2] rounded-full absolute top-0 right-0 w-5 h-5 m-[8%]' />
+        <div className='bg-[#755AE2] rounded-full absolute top-0 right-0 w-5 h-5 m-[8%] flex justify-center items-center'>
+      {
+        startRecording && <img src={monitorrecorder} alt="notloading" className='block mx-auto' />
+      }
+      
+        
+          </div>
         
         {/* default indicator for webcam */}
         <div className='mx-auto'>
 
         {
-    startRecording ? <CircularProgressbarWithChildren value={100} background={true} styles={buildStyles({
+    startRecording ? <div className='border bg-[#755AE2] border-[#755AE2] rounded-full p-1 '><CircularProgressbarWithChildren value={100} background={true} styles={buildStyles({
 
-      backgroundColor: '#755AE2'
+       backgroundColor: '#755AE2',
+       pathColor: "transparent",
+
     })}>
 
     {
-      <DoneOutlinedIcon/>
+      <DoneOutlinedIcon style={{ color: "white" }}/>
     }
-    </CircularProgressbarWithChildren> :
+    </CircularProgressbarWithChildren></div>  :
   <img src={webcam} alt="notloading" className='block mx-auto' />
 
   }
@@ -98,17 +109,26 @@ const HomePage = () => {
        </div>
 
        <div className='w-[91px] bg-[#E6E0FF] p-4 rounded-2xl relative'>
-       <div className='bg-[#755AE2] rounded-full absolute top-0 right-0 w-5 h-5 m-[8%]'/>
+       <div className= {startRecording ? 'bg-[#FF5F56] rounded-full absolute top-0 right-0 w-5 h-5 m-[8%] flex justify-center items-center':'bg-[#755AE2] rounded-full absolute top-0 right-0 w-5 h-5 m-[8%] flex justify-center items-center'}>
+       {
+        startRecording && <img src={speed} alt="notloading" className='block mx-auto' />
+      }
+       </div>
 
  {/* default indicator for webcam */}
  <div className='mx-auto'>
  {
-    startRecording ? <CircularProgressbarWithChildren value={66}>
+    startRecording ? <div className=' rounded-full p-1 '><CircularProgressbarWithChildren value={50} background={true} styles={buildStyles({
 
-    {
-  
-    }
-    </CircularProgressbarWithChildren> :
+      backgroundColor: '#FF5F561A',
+      pathColor: "#FF5F56",
+
+   })}>
+
+   {
+     <ReportProblemIcon style={{ color: "white" }}/>
+   }
+   </CircularProgressbarWithChildren></div>  :
   <img src={lighting} alt="notloading" className='block mx-auto' />
 
   }
@@ -125,18 +145,27 @@ Speed
         <div className='flex gap-4 mt-4'>
 
         <div className='w-[91px] bg-[#E6E0FF] p-4 rounded-2xl relative'>
-        <div className='bg-[#755AE2] rounded-full absolute top-0 right-0 w-5 h-5 m-[8%]' />
+        <div className='bg-[#755AE2] rounded-full absolute top-0 right-0 w-5 h-5 m-[8%] flex justify-center items-center'>
+        {
+        startRecording && <img src={microphone} alt="notloading" className='block mx-auto' />
+      }
+        </div>
 
  {/* default indicator for webcam */}
  <div className='mx-auto'>
     
  {
-    startRecording ? <CircularProgressbarWithChildren value={66}>
+    startRecording ? <div className='border bg-[#755AE2] border-[#755AE2] rounded-full p-1 '><CircularProgressbarWithChildren value={100} background={true} styles={buildStyles({
 
-    {
-  
-    }
-    </CircularProgressbarWithChildren> :
+      backgroundColor: '#755AE2',
+      pathColor: "transparent",
+
+   })}>
+
+   {
+     <DoneOutlinedIcon style={{ color: "white" }}/>
+   }
+   </CircularProgressbarWithChildren></div>  :
   <img src={webcam} alt="notloading" className='block mx-auto' />
 
   }
@@ -150,18 +179,28 @@ Speed
 </div>
 
 <div className='w-[91px] bg-[#E6E0FF] p-4 rounded-2xl relative'>
-<div className='bg-[#755AE2] rounded-full absolute top-0 right-0 w-5 h-5 m-[8%]'/>
+<div className='bg-[#755AE2] rounded-full absolute top-0 right-0 w-5 h-5 m-[8%] flex justify-center items-center'>
+
+{
+        startRecording && <img src={lampcharge} alt="notloading" className='block mx-auto' />
+      }
+</div>
   
  {/* default indicator for webcam */}
  <div className='mx-auto'>
 
   {
-    startRecording ? <CircularProgressbarWithChildren value={66}>
+    startRecording ? <div className='  rounded-full p-1 '><CircularProgressbarWithChildren value={50} background={true} styles={buildStyles({
 
-    {
-  
-    }
-    </CircularProgressbarWithChildren> :
+      backgroundColor: 'transparent',
+      pathColor: "#755AE2",
+
+   })}>
+
+   {
+    <img src={lighting} alt="notloading" className='block mx-auto' />
+   }
+   </CircularProgressbarWithChildren></div>  :
   <img src={lighting} alt="notloading" className='block mx-auto' />
 
   }
