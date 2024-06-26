@@ -11,15 +11,21 @@ import tick from '../assets/img/tick-circle.png';
 
 const HomePage = () => {
 
-  const [startRecording, setStartRecording] = useState(null);
-  const [webcamIsOn, setWebcamStatus] = useState(false);
+  const [startRecording, setStartRecording] = useState(false);
+ 
 
   const handleStartRecording = () => {
-    if (startRecording) {
-      startRecording();
-    } else {
-      console.error("Start recording function is not available.");
-    }
+    
+
+    if(startRecording == false)
+      {
+        setStartRecording(true);
+      }
+
+      else
+      {
+        setStartRecording(false);
+      }
   };
         // const stopRecording = () => {
         //     if (webCamRef.current && webCamRef.current.stream) {
@@ -41,7 +47,7 @@ const HomePage = () => {
 
       <p className='text-justify mt-5'>
       We utilize your camera image to ensure fairness for all participants, and we also employ both your camera and microphone for a video questions where you will be prompted to record a response using your camera or webcam, so it's essential to verify that your camera and microphone are functioning correctly and that you have a stable internet connection.
-      To do this, please position yourself in front of your camera, ensuring that your entire face is clearly visible on the screen. This includes your forehead, eyes, ears, nose, and lips. You can initiate a  5-second recording of yourself by clicking the button below.
+      To do this, please position yourself in front of your camera, ensuring that your entire face is clearly visible on the screen. This includes your forehead, eyes, ears, nose, and lips. You can initiate a 5-second recording of yourself by clicking the button below.
       </p>
 
 
@@ -49,7 +55,11 @@ const HomePage = () => {
       
       {/* Webcam wrapper */}
       <div className='Webcam rounded-[10px] p-1 border-[#755AE2] border md:max-w-[275px]'>
-      <ObjectDetection setStartRecording={setStartRecording} setWebcamStatus={setWebcamStatus}  />
+
+        {
+          startRecording ? <ObjectDetection  /> :  null
+        }
+      
       </div>
 
 
@@ -64,7 +74,7 @@ const HomePage = () => {
         <div className='mx-auto'>
 
         {
-    webcamIsOn ? <CircularProgressbarWithChildren value={100} background={true} styles={buildStyles({
+    startRecording ? <CircularProgressbarWithChildren value={100} background={true} styles={buildStyles({
 
       backgroundColor: '#755AE2'
     })}>
@@ -93,7 +103,7 @@ const HomePage = () => {
  {/* default indicator for webcam */}
  <div className='mx-auto'>
  {
-    webcamIsOn ? <CircularProgressbarWithChildren value={66}>
+    startRecording ? <CircularProgressbarWithChildren value={66}>
 
     {
   
@@ -121,7 +131,7 @@ Speed
  <div className='mx-auto'>
     
  {
-    webcamIsOn ? <CircularProgressbarWithChildren value={66}>
+    startRecording ? <CircularProgressbarWithChildren value={66}>
 
     {
   
@@ -146,7 +156,7 @@ Speed
  <div className='mx-auto'>
 
   {
-    webcamIsOn ? <CircularProgressbarWithChildren value={66}>
+    startRecording ? <CircularProgressbarWithChildren value={66}>
 
     {
   
@@ -169,7 +179,7 @@ Speed
       </div>
 
       <div className='mt-10 flex '>
-      <Button onClick={startRecording} color="purple">Take Picture and Continue</Button>
+      <Button onClick={handleStartRecording} color="purple">Take Picture and Continue</Button>
       </div>
     </div>
   )
